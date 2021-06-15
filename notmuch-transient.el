@@ -155,8 +155,8 @@
    ["Filter"
     ("l" "limit"            notmuch-show-filter-thread)]
    ["Display"
-     ("Z" "tree"            notmuch-tree-from-show-current-query)
-     ("U" "unthreaded"      notmuch-unthreaded-from-show-current-query)]]
+    ("Z" "tree"            notmuch-tree-from-show-current-query)
+    ("U" "unthreaded"      notmuch-unthreaded-from-show-current-query)]]
   [["Archive"
     ("X" "thread & exit"   notmuch-show-archive-thread-then-exit)
     ("x" "message & exit"  notmuch-show-archive-message-then-next-or-exit)
@@ -239,8 +239,8 @@ This is a replacement for `notmuch-jump-search'."
     (t          (notmuch-search query
                                 (cl-case order
                                   (newest-first nil)
-			          (oldest-first t)
-			          (t notmuch-search-oldest-first))))))
+                                  (oldest-first t)
+                                  (t notmuch-search-oldest-first))))))
 
 ;;; Tagging
 
