@@ -66,19 +66,34 @@
 (transient-define-prefix notmuch-tree-mode-transient ()
   "Command dispatcher for \"notmuch tree\" buffers."
   :suffix-description 'transient-command-summary-or-name
+  [["Do"
+    ("m" "new mail"        notmuch-tree-new-mail)
+    ("r" "reply sender"    notmuch-tree-reply-sender)
+    ("R" "reply all"       notmuch-tree-reply)
+    ("f" "forward"         notmuch-tree-forward-message)
+    ("b" "resend"          notmuch-show-resend-message)]
+   ["Tag"
+    ("t" "toggle"          notmuch-tag-transient)
+    ("+" "add tag"         notmuch-tree-add-tag)
+    ("-" "remove tag"      notmuch-tree-remove-tag)
+    ("*" "tag all"         notmuch-tree-tag-thread)]]
+  [["Message"
+    ("V" "view raw"        notmuch-tree-view-raw-message)
+    ("|" "pipe"            notmuch-show-pipe-message)]
+   ["Part"
+    ("v" "view all"        notmuch-show-view-all-mime-parts)]
+   ["Miscellaneous"
+    ("w" "save attachments" notmuch-show-save-attachments)
+    ("c" "stash..."        notmuch-show-stash-transient)]]
   [["Search"
-    ("s" "plain"     notmuch-tree-to-search)
-    ("z" "tree"      notmuch-tree-to-tree)]
+    ("s" "plain"           notmuch-tree-to-search)
+    ("z" "tree"            notmuch-tree-to-tree)]
    ["Repeat search"
-    ("j" "saved"     notmuch-search-transient)]
+    ("j" "saved"           notmuch-search-transient)]
    ["Display"
     ("S" notmuch-search-from-tree-current-query)
     ("U" notmuch-unthreaded-from-tree-current-query)
-    ("Z" notmuch-tree-from-unthreaded-current-query)]]
-  [["Tagging"
-    ("t" "toggle"    notmuch-tag-transient)]
-   ["Actions"
-    ("m" "new mail"  notmuch-tree-new-mail)]])
+    ("Z" notmuch-tree-from-unthreaded-current-query)]])
 
 ;;; Search
 
@@ -91,18 +106,19 @@
    ["Stash"
     ("c i" "id"            notmuch-search-stash-thread-id)
     ("c q" "query"         notmuch-stash-query)]]
-  [["Filter / Tag"
+  [["Display"
+    ("Z" "tree"            notmuch-tree-from-search-current-query)
+    ("U" "unthreaded"      notmuch-unthreaded-from-search-current-query)]
+   ["Refine"
     ("o" "toggle order"    notmuch-search-toggle-order)
     ("t" "filter by tag"   notmuch-search-filter-by-tag)
-    ("l" "filter"          notmuch-search-filter)
-    ("k" "toggle tags"     notmuch-tag-transient)
-    ("*" "tag all"         notmuch-search-tag-all)
-    ("a" "archive"         notmuch-search-archive-thread)
+    ("l" "filter"          notmuch-search-filter)]
+   ["Tag"
+    ("k" "tag menu"        notmuch-tag-transient)
     ("+" "add tag"         notmuch-search-add-tag)
-    ("-" "remove tag"      notmuch-search-remove-tag)]
-   ["Display"
-    ("Z" "tree"            notmuch-tree-from-search-current-query)
-    ("U" "unthreaded"      notmuch-unthreaded-from-search-current-query)]])
+    ("-" "remove tag"      notmuch-search-remove-tag)
+    ("a" "archive"         notmuch-search-archive-thread)
+    ("*" "tag all"         notmuch-search-tag-all)]])
 
 ;;;###autoload (autoload 'notmuch-search-stash-transient "notmuch-transient" nil t)
 (transient-define-prefix notmuch-search-stash-transient ()
@@ -116,21 +132,23 @@
 ;;;###autoload (autoload 'notmuch-show-mode-transient "notmuch-transient" nil t)
 (transient-define-prefix notmuch-show-mode-transient ()
   "Command dispatcher for \"notmuch show\" buffers."
-  [["Stash"
-    ("c f" "from"           notmuch-show-stash-from)
-    ("c t" "to"             notmuch-show-stash-to)
-    ("c c" "cc"             notmuch-show-stash-cc)
-    ("c s" "subject"        notmuch-show-stash-subject)
-    ("c d" "date"           notmuch-show-stash-date)]
-   [""
-    ("c i" "id"             notmuch-show-stash-message-id)
-    ("c I" "id (stripped)"  notmuch-show-stash-message-id-stripped)
-    ("c F" "filename"       notmuch-show-stash-filename)
-    ("c T" "tags"           notmuch-show-stash-tags)]
-   [""
-    ("c l" "link"           notmuch-show-stash-mlarchive-link)
-    ("c L" "link and go"    notmuch-show-stash-mlarchive-link-and-go)
-    ("c G" "git send-email" notmuch-show-stash-git-send-email)]]
+  [["Do"
+    ("r" "reply to sender" notmuch-show-reply-sender)
+    ("R" "reply to all"    notmuch-show-reply)
+    ("f" "forward"         notmuch-show-forward-message)
+    ("F" "forward open"    notmuch-show-forward-open-messages)
+    ("b" "resend"          notmuch-show-resend-message)
+    ("e" "resume"          notmuch-show-resume-message)]
+   ["Archive"
+    ("X" "thread & exit"   notmuch-show-archive-thread-then-exit)
+    ("x" "message & exit"  notmuch-show-archive-message-then-next-or-exit)
+    ("A" "thread"          notmuch-show-archive-thread-then-next)
+    ("a" "message"         notmuch-show-archive-message-then-next-or-next-thread)]
+   ["Tag"
+    ("k" "tag menu"        notmuch-tag-transient)
+    ("+" "add tag"         notmuch-show-add-tag)
+    ("-" "remove tag"      notmuch-show-remove-tag)
+    ("*" "tag all"         notmuch-show-tag-all)]]
   [["Message"
     ("V" "view raw"         notmuch-show-view-raw-message)
     ("|" "pipe"             notmuch-show-pipe-message)
@@ -141,11 +159,10 @@
     (". o" "view interactively" notmuch-show-interactively-view-part)
     (". |" "pipe"               notmuch-show-pipe-part)
     (". m" "choose mime"        notmuch-show-choose-mime-of-part)]
-   ["Attachment"
-    ("w" "save"             notmuch-show-save-attachments)
-    ""
-    "Links"
-    ("B" "browse"           notmuch-show-browse-urls)]]
+   ["Miscellaneous"
+    ("w" "save attachments"     notmuch-show-save-attachments)
+    ("c" "stash..."             notmuch-show-stash-transient)
+    ("B" "browse urls"          notmuch-show-browse-urls)]]
   [["Toggle"
     ("h" "header visibility"  notmuch-show-toggle-visibility-headers :transient t)
     ("!" "elide non-matching" notmuch-show-toggle-elide-non-matching :transient t)
@@ -155,20 +172,8 @@
    ["Filter"
     ("l" "limit"            notmuch-show-filter-thread)]
    ["Display"
-    ("Z" "tree"            notmuch-tree-from-show-current-query)
-    ("U" "unthreaded"      notmuch-unthreaded-from-show-current-query)]]
-  [["Archive"
-    ("X" "thread & exit"   notmuch-show-archive-thread-then-exit)
-    ("x" "message & exit"  notmuch-show-archive-message-then-next-or-exit)
-    ("A" "thread"          notmuch-show-archive-thread-then-next)
-    ("a" "message"         notmuch-show-archive-message-then-next-or-next-thread)]
-   ["Do"
-    ("r" "reply to sender" notmuch-show-reply-sender)
-    ("R" "reply to all"    notmuch-show-reply)
-    ("f" "forward"         notmuch-show-forward-message)
-    ("F" "forward open"    notmuch-show-forward-open-messages)
-    ("b" "resend"          notmuch-show-resend-message)
-    ("e" "resume"          notmuch-show-resume-message)]])
+    ("Z" "tree"             notmuch-tree-from-show-current-query)
+    ("U" "unthreaded"       notmuch-unthreaded-from-show-current-query)]])
 
 ;;;###autoload (autoload 'notmuch-show-stash-transient "notmuch-transient" nil t)
 (transient-define-prefix notmuch-show-stash-transient ()
