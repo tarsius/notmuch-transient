@@ -47,6 +47,20 @@
 (defvar notmuch-transient-prefix (kbd "C-d")
   "The prefix key used for various transient commands.")
 
+;;; Faces
+
+(defgroup notmuch-transient-faces nil
+  "Faces used by Notmuch-Transient."
+  :group 'faces)
+
+(defface notmuch-transient-add-tag '((t :inherit success))
+  "Face for tags to be added to the current list."
+  :group 'notmuch-transient-faces)
+
+(defface notmuch-transient-remove-tag '((t :inherit error))
+  "Face for tags to be removed from the current list."
+  :group 'notmuch-transient-faces)
+
 ;;; Hello
 
 ;;;###autoload (autoload 'notmuch-hello-mode-transient "notmuch-transient" nil t)
@@ -325,9 +339,9 @@ This is a replacement for `notmuch-tag-jump'."
                             (= op ?+))
                        (propertize
                         change 'face
-                        (list :foreground (if (= op ?+)
-                                              "dark green"
-                                            "dark red")))
+                        (if (= op ?+)
+                            'notmuch-transient-add-tag
+                          'notmuch-transient-remove-tag))
                      change)))
                (notmuch-transient-tag-infix--get-changes obj)
                " ")))
