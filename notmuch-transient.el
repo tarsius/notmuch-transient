@@ -6,7 +6,7 @@
 ;; Homepage: https://git.sr.ht/~tarsius/notmuch-transient
 ;; Keywords: mail
 
-;; Package-Requires: ((emacs "27.1") (notmuch "0.31.4"))
+;; Package-Requires: ((emacs "27.1") (compat "28.1.1.0") (notmuch "0.31.4"))
 
 ;; This file is free software: you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published
@@ -30,10 +30,11 @@
 
 ;;; Code:
 
+(require 'compat)
 (require 'let-alist)
-(require 'transient)
 
 (require 'notmuch)
+(require 'transient)
 
 ;;; Variables
 
