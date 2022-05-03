@@ -142,8 +142,8 @@
 (transient-define-prefix notmuch-search-stash-transient ()
   "Command dispatcher for stashing from \"notmuch search\" buffers."
   [["Stash"
-    ("i" "tread id" notmuch-search-stash-thread-id)
-    ("q" "query"    notmuch-stash-query)]])
+    ("i" "thread id" notmuch-search-stash-thread-id)
+    ("q" "query"     notmuch-stash-query)]])
 
 ;;; Show
 
