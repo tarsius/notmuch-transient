@@ -292,22 +292,22 @@ This is a replacement for `notmuch-tag-jump'."
   (format "Current tags: %s" (oref transient--prefix value)))
 
 (defun notmuch-tag-transient--setup (_)
-  (cl-mapcan (pcase-lambda (`(,key ,tags ,desc))
-               (when (symbolp tags)
-                 (setq tags (symbol-value tags)))
-               (transient--parse-child
-                'notmuch-tag-transient
-                (list (key-description key)
-                      desc
-                      (lambda ()
-                        (interactive)
-                        (notmuch-transient--do-tag
-                         (notmuch-transient-tag-infix--get-changes
-                          (transient-suffix-object)))
-                        (transient-init-value transient-current-prefix))
-                      :class 'notmuch-transient-tag-infix
-                      :tags tags)))
-             notmuch-tagging-keys))
+  (transient-parse-suffixes
+   'notmuch-tag-transient
+   (mapcar (pcase-lambda (`(,key ,tags ,desc))
+             (when (symbolp tags)
+               (setq tags (symbol-value tags)))
+             (list (key-description key)
+                   desc
+                   (lambda ()
+                     (interactive)
+                     (notmuch-transient--do-tag
+                      (notmuch-transient-tag-infix--get-changes
+                       (transient-suffix-object)))
+                     (transient-init-value transient-current-prefix))
+                   :class 'notmuch-transient-tag-infix
+                   :tags tags))
+           notmuch-tagging-keys)))
 
 (defclass notmuch-transient-tag-infix (transient-infix)
   ((transient :initform 'transient--do-exit)
