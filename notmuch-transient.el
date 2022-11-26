@@ -240,18 +240,18 @@ This is a replacement for `notmuch-jump-search'."
   (transient-setup 'notmuch-search-transient))
 
 (defun notmuch-search-transient--setup (_)
-  (cl-mapcan (lambda (search)
-               (let-alist (transient-plist-to-alist search)
-                 (and .key
-                      (transient--parse-child
-                       'notmuch-search-transient
-                       (list (key-description .key)
-                             .name
-                             (lambda ()
-                               (interactive)
-                               (notmuch-transient--search
-                                .search-type .query .sort-order)))))))
-             notmuch-saved-searches))
+  (transient-parse-suffixes
+   'notmuch-search-transient
+   (mapcar (lambda (search)
+             (let-alist (transient-plist-to-alist search)
+               (and .key
+                    (list (key-description .key)
+                          .name
+                          (lambda ()
+                            (interactive)
+                            (notmuch-transient--search
+                             .search-type .query .sort-order))))))
+           notmuch-saved-searches)))
 
 ;;;; Compatibility kludges
 
