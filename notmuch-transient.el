@@ -7,7 +7,7 @@
 ;; Homepage: https://git.sr.ht/~tarsius/notmuch-transient
 ;; Keywords: mail
 
-;; Package-Requires: ((emacs "27.1") (compat "28.1.1.0") (notmuch "0.31.4"))
+;; Package-Requires: ((emacs "27.1") (compat "29.1.3.4") (notmuch "0.31.4"))
 
 ;; SPDX-License-Identifier: GPL-3.0-or-later
 
