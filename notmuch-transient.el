@@ -48,7 +48,7 @@
 (defvar notmuch-transient-add-bindings t
   "Whether loading `notmuch-transient' adds binding to existing keymaps.")
 
-(defvar notmuch-transient-prefix (kbd "C-d")
+(defvar notmuch-transient-prefix "C-d"
   "The prefix key used for various transient commands.")
 
 ;;; Faces
@@ -388,23 +388,23 @@ This is a replacement for `notmuch-tag-jump'."
 
 (when notmuch-transient-add-bindings
 
-  (define-key notmuch-hello-mode-map  notmuch-transient-prefix #'notmuch-hello-mode-transient)
-  (define-key notmuch-tree-mode-map   notmuch-transient-prefix #'notmuch-tree-mode-transient)
-  (define-key notmuch-search-mode-map notmuch-transient-prefix #'notmuch-search-mode-transient)
-  (define-key notmuch-show-mode-map   notmuch-transient-prefix #'notmuch-show-mode-transient)
+  (keymap-set notmuch-hello-mode-map  notmuch-transient-prefix #'notmuch-hello-mode-transient)
+  (keymap-set notmuch-tree-mode-map   notmuch-transient-prefix #'notmuch-tree-mode-transient)
+  (keymap-set notmuch-search-mode-map notmuch-transient-prefix #'notmuch-search-mode-transient)
+  (keymap-set notmuch-show-mode-map   notmuch-transient-prefix #'notmuch-show-mode-transient)
 
-  (define-key notmuch-search-mode-map "c" #'notmuch-search-stash-transient)
-  (define-key notmuch-show-mode-map   "c" #'notmuch-show-stash-transient)
-  (define-key notmuch-tree-mode-map   "c" #'notmuch-show-stash-transient)
+  (keymap-set notmuch-search-mode-map "c" #'notmuch-search-stash-transient)
+  (keymap-set notmuch-show-mode-map   "c" #'notmuch-show-stash-transient)
+  (keymap-set notmuch-tree-mode-map   "c" #'notmuch-show-stash-transient)
 
-  (define-key notmuch-show-mode-map   "." #'notmuch-show-part-transient)
+  (keymap-set notmuch-show-mode-map   "." #'notmuch-show-part-transient)
 
-  (define-key notmuch-common-keymap   "j" #'notmuch-search-transient)
-  (define-key notmuch-tree-mode-map   "j" #'notmuch-search-transient)
+  (keymap-set notmuch-common-keymap   "j" #'notmuch-search-transient)
+  (keymap-set notmuch-tree-mode-map   "j" #'notmuch-search-transient)
 
-  (define-key notmuch-search-mode-map "k" #'notmuch-tag-transient)
-  (define-key notmuch-tree-mode-map   "k" #'notmuch-tag-transient)
-  (define-key notmuch-show-mode-map   "k" #'notmuch-tag-transient))
+  (keymap-set notmuch-search-mode-map "k" #'notmuch-tag-transient)
+  (keymap-set notmuch-tree-mode-map   "k" #'notmuch-tag-transient)
+  (keymap-set notmuch-show-mode-map   "k" #'notmuch-tag-transient))
 
 ;;; _
 (provide 'notmuch-transient)
