@@ -9,9 +9,9 @@
 
 ;; Package-Requires: (
 ;;     (emacs "27.1")
-;;     (compat "29.1.4.1")
-;;     (notmuch "0.37")
-;;     (transient "0.4.0"))
+;;     (compat "29.1.4.4")
+;;     (notmuch "0.38.2")
+;;     (transient "0.5.2"))
 
 ;; SPDX-License-Identifier: GPL-3.0-or-later
 
