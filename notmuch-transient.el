@@ -234,9 +234,9 @@ Repeat a search, which is saved and associated
 with a key in option `notmuch-saved-searches'.
 
 This is a replacement for `notmuch-jump-search'."
-  ["Search"
-   :class transient-row
+  [:class transient-row
    :setup-children notmuch-search-transient--setup
+   :description "Search"
    :pad-keys t]
   (interactive)
   (when (derived-mode-p 'notmuch-tree-mode)
