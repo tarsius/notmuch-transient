@@ -281,8 +281,9 @@ to `notmuch-transient--tagging-inverse-name'.
 
 This is a replacement for `notmuch-tag-jump'."
   :init-value #'notmuch-tag-transient--init
-  [:description notmuch-tag-transient--description
+  [:class transient-column
    :setup-children notmuch-tag-transient--setup
+   :description notmuch-tag-transient--description
    :pad-keys t]
   (interactive)
   (when (derived-mode-p 'notmuch-tree-mode)
