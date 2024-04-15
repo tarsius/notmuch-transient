@@ -3,7 +3,7 @@
 ;; Copyright (C) 2020-2021 Free Software Foundation, Inc.
 ;; Copyright (C) 2021-2024 Jonas Bernoulli
 
-;; Author: Jonas Bernoulli <jonas@bernoul.li>
+;; Author: Jonas Bernoulli <emacs.notmuch-transient@jonas.bernoulli.dev>
 ;; Homepage: https://git.sr.ht/~tarsius/notmuch-transient
 ;; Keywords: mail
 
