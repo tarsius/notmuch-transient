@@ -247,7 +247,7 @@ This is a replacement for `notmuch-jump-search'."
   (transient-parse-suffixes
    'notmuch-search-transient
    (mapcar (lambda (search)
-             (let-alist (transient-plist-to-alist search)
+             (let-alist (notmuch-transient--plist-to-alist search)
                (and .key
                     (list (key-description .key)
                           .name
@@ -268,6 +268,18 @@ This is a replacement for `notmuch-jump-search'."
                                   (newest-first nil)
                                   (oldest-first t)
                                   (t notmuch-search-oldest-first))))))
+
+(defun notmuch-transient--plist-to-alist (plist)
+  (let (alist)
+    (while plist
+      (push (cons (let* ((symbol (pop plist))
+                         (name (symbol-name symbol)))
+                    (if (eq (aref name 0) ?:)
+                        (intern (substring name 1))
+                      symbol))
+                  (pop plist))
+            alist))
+    (nreverse alist)))
 
 ;;; Tagging
 
