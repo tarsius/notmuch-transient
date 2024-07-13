@@ -9,7 +9,7 @@
 
 ;; Package-Requires: (
 ;;     (emacs "27.1")
-;;     (compat "29.1.4.5")
+;;     (compat "30.0.0.0")
 ;;     (notmuch "0.38.2")
 ;;     (transient "0.7.0"))
 
