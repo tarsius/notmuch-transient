@@ -1,0 +1,10 @@
+* Command dispatchers for Notmuch
+
+This package provides dispatcher menus for Notmuch commands, as well
+as some commands defined here, which deal with tags.
+
+Everything is still incomplete and very much subject to change.
+
+#+html: <br><br>
+#+html: <a href="https://stable.melpa.org/#/notmuch-transient"><img alt="MELPA Stable" src="https://stable.melpa.org/packages/notmuch-transient-badge.svg"/></a>
+#+html: <a href="https://melpa.org/#/notmuch-transient"><img alt="MELPA" src="https://melpa.org/packages/notmuch-transient-badge.svg"/></a>
