@@ -40,6 +40,7 @@
 
 (require 'compat)
 (require 'let-alist)
+(require 'seq)
 
 (require 'notmuch)
 (require 'transient)
@@ -247,16 +248,16 @@ This is a replacement for `notmuch-jump-search'."
 (defun notmuch-search-transient--setup (_)
   (transient-parse-suffixes
    'notmuch-search-transient
-   (mapcar (lambda (search)
-             (let-alist (notmuch-transient--plist-to-alist search)
-               (and .key
-                    (list (key-description .key)
-                          .name
-                          (lambda ()
-                            (interactive)
-                            (notmuch-transient--search
-                             .search-type .query .sort-order))))))
-           notmuch-saved-searches)))
+   (seq-keep (lambda (search)
+               (let-alist (notmuch-transient--plist-to-alist search)
+                 (and .key
+                      (list (key-description .key)
+                            .name
+                            (lambda ()
+                              (interactive)
+                              (notmuch-transient--search
+                               .search-type .query .sort-order))))))
+             notmuch-saved-searches)))
 
 ;;;; Compatibility kludges
 
