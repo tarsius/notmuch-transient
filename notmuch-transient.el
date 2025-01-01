@@ -1,18 +1,18 @@
 ;;; notmuch-transient.el --- Command dispatchers for Notmuch  -*- lexical-binding:t -*-
 
 ;; Copyright (C) 2020-2021 Free Software Foundation, Inc.
-;; Copyright (C) 2021-2024 Jonas Bernoulli
+;; Copyright (C) 2021-2025 Jonas Bernoulli
 
 ;; Author: Jonas Bernoulli <emacs.notmuch-transient@jonas.bernoulli.dev>
 ;; Homepage: https://git.sr.ht/~tarsius/notmuch-transient
 ;; Keywords: mail
 
-;; Package-Version: 1.0.0
+;; Package-Version: 1.0.1
 ;; Package-Requires: (
 ;;     (emacs "27.1")
-;;     (compat "30.0.0.0")
+;;     (compat "30.0.1.0")
 ;;     (notmuch "0.38.2")
-;;     (transient "0.7.0"))
+;;     (transient "0.8.2"))
 
 ;; SPDX-License-Identifier: GPL-3.0-or-later
 
