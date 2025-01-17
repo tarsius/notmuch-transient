@@ -4,7 +4,7 @@
 ;; Copyright (C) 2021-2025 Jonas Bernoulli
 
 ;; Author: Jonas Bernoulli <emacs.notmuch-transient@jonas.bernoulli.dev>
-;; Homepage: https://git.sr.ht/~tarsius/notmuch-transient
+;; Homepage: https://github.com/tarsius/notmuch-transient
 ;; Keywords: mail
 
 ;; Package-Version: 1.0.1
