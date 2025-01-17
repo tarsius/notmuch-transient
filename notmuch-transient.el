@@ -9,8 +9,8 @@
 
 ;; Package-Version: 1.0.1
 ;; Package-Requires: (
-;;     (emacs "27.1")
-;;     (compat "30.0.1.0")
+;;     (emacs "29.1")
+;;     (compat "30.0.2.0")
 ;;     (notmuch "0.38.2")
 ;;     (transient "0.8.2"))
 
