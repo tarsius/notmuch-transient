@@ -7,12 +7,12 @@
 ;; Homepage: https://github.com/tarsius/notmuch-transient
 ;; Keywords: mail
 
-;; Package-Version: 1.1.0
+;; Package-Version: 1.1.1
 ;; Package-Requires: (
 ;;     (emacs "29.1")
-;;     (compat "30.0.2.0")
+;;     (compat "30.1")
 ;;     (notmuch "0.38.2")
-;;     (transient "0.8.2"))
+;;     (transient "0.9.0"))
 
 ;; SPDX-License-Identifier: GPL-3.0-or-later
 
