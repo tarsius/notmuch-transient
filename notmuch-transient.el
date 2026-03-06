@@ -294,7 +294,9 @@ a transitional period you have to additionally add an entry
 to `notmuch-transient--tagging-inverse-name'.
 
 This is a replacement for `notmuch-tag-jump'."
-  :init-value #'notmuch-tag-transient--init
+  :refresh-suffixes t
+  :transient-suffix t
+  :transient-non-suffix t
   [:class transient-column
    :setup-children notmuch-tag-transient--setup
    :description notmuch-tag-transient--description
@@ -304,33 +306,31 @@ This is a replacement for `notmuch-tag-jump'."
     (notmuch-tree-close-message-window))
   (transient-setup 'notmuch-tag-transient))
 
-(defun notmuch-tag-transient--init (obj)
-  (oset obj scope (notmuch-transient--get-tags)))
-
 (defun notmuch-tag-transient--description ()
   (format "Current tags: %s" (oref transient--prefix scope)))
 
 (defun notmuch-tag-transient--setup (_)
-  (transient-parse-suffixes
-   'notmuch-tag-transient
-   (mapcar (pcase-lambda (`(,key ,tags ,desc))
-             (when (symbolp tags)
-               (setq tags (symbol-value tags)))
-             (list (key-description key)
-                   desc
-                   (lambda ()
-                     (interactive)
-                     (notmuch-transient--do-tag
-                      (notmuch-transient-tag-infix--get-changes
-                       (transient-suffix-object)))
-                     (transient-init-value transient-current-prefix))
-                   :class 'notmuch-transient-tag-infix
-                   :tags tags))
-           notmuch-tagging-keys)))
+  (let ((prefix (transient-prefix-object)))
+    (oset prefix scope (notmuch-transient--get-tags))
+    (transient-parse-suffixes
+     'notmuch-tag-transient
+     (mapcar (pcase-lambda (`(,key ,tags ,desc))
+               (when (symbolp tags)
+                 (setq tags (symbol-value tags)))
+               (list (key-description key)
+                     desc
+                     (lambda ()
+                       (interactive)
+                       (notmuch-transient--do-tag
+                        (notmuch-transient-tag-infix--get-changes
+                         (transient-suffix-object)))
+                       (transient-init-value prefix))
+                     :class 'notmuch-transient-tag-infix
+                     :tags tags))
+             notmuch-tagging-keys))))
 
 (defclass notmuch-transient-tag-infix (transient-infix)
-  ((transient :initform 'transient--do-exit)
-   (tags :initarg :tags)))
+  ((tags :initarg :tags)))
 
 (cl-defmethod transient-init-value ((obj notmuch-transient-tag-infix))
   (let ((value (oref transient--prefix scope)))
