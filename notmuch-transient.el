@@ -60,11 +60,15 @@
   :group 'faces)
 
 (defface notmuch-transient-add-tag '((t :inherit success))
-  "Face for tags to be added to the current list."
+  "Face used for tags to be added to the current list."
   :group 'notmuch-transient-faces)
 
 (defface notmuch-transient-remove-tag '((t :inherit error))
-  "Face for tags to be removed from the current list."
+  "Face used for tags to be removed from the current list."
+  :group 'notmuch-transient-faces)
+
+(defface notmuch-transient-enabled-tag '((t :inherit success :weight bold))
+  "Face used when listing currently enabled tags."
   :group 'notmuch-transient-faces)
 
 ;;; Hello
@@ -307,7 +311,11 @@ This is a replacement for `notmuch-tag-jump'."
   (transient-setup 'notmuch-tag-transient))
 
 (defun notmuch-tag-transient--description ()
-  (format "Current tags: %s" (oref transient--prefix scope)))
+  (format (propertize "Current tags: %s" 'face 'transient-heading)
+          (mapconcat (lambda (tag)
+                       (propertize tag 'face 'notmuch-transient-enabled-tag))
+                     (oref transient--prefix scope)
+                     " ")))
 
 (defun notmuch-tag-transient--setup (_)
   (let ((prefix (transient-prefix-object)))
