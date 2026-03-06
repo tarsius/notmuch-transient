@@ -305,10 +305,10 @@ This is a replacement for `notmuch-tag-jump'."
   (transient-setup 'notmuch-tag-transient))
 
 (defun notmuch-tag-transient--init (obj)
-  (oset obj value (notmuch-transient--get-tags)))
+  (oset obj scope (notmuch-transient--get-tags)))
 
 (defun notmuch-tag-transient--description ()
-  (format "Current tags: %s" (oref transient--prefix value)))
+  (format "Current tags: %s" (oref transient--prefix scope)))
 
 (defun notmuch-tag-transient--setup (_)
   (transient-parse-suffixes
@@ -333,7 +333,7 @@ This is a replacement for `notmuch-tag-jump'."
    (tags :initarg :tags)))
 
 (cl-defmethod transient-init-value ((obj notmuch-transient-tag-infix))
-  (let ((value (oref transient--prefix value)))
+  (let ((value (oref transient--prefix scope)))
     (oset obj value
           (delq nil (mapcar (lambda (change)
                               (car (member (substring change 1) value)))
@@ -343,14 +343,14 @@ This is a replacement for `notmuch-tag-jump'."
   (let ((desc (oref obj description))
         (change (car (oref obj tags))))
     (if (xor (member (substring change 1)
-                     (oref transient--prefix value))
+                     (oref transient--prefix scope))
              (= (aref change 0) ?+))
         (propertize desc 'face 'bold)
       (cdr (assoc desc (bound-and-true-p
                         notmuch-transient--tagging-inverse-name))))))
 
 (cl-defmethod transient-format-value ((obj notmuch-transient-tag-infix))
-  (let ((value (oref transient--prefix value)))
+  (let ((value (oref transient--prefix scope)))
     (mapconcat (lambda (change)
                  (let ((tag (substring change 1))
                        (op  (aref change 0)))
@@ -366,7 +366,7 @@ This is a replacement for `notmuch-tag-jump'."
                " ")))
 
 (defun notmuch-transient-tag-infix--get-changes (obj)
-  (let* ((value   (oref (transient-prefix-object) value))
+  (let* ((value   (oref (transient-prefix-object) scope))
          (changes (oref obj tags))
          (change  (car changes)))
     (if (xor (member (substring change 1) value)
