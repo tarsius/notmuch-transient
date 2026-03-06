@@ -366,7 +366,7 @@ This is a replacement for `notmuch-tag-jump'."
                " ")))
 
 (defun notmuch-transient-tag-infix--get-changes (obj)
-  (let* ((value   (oref (or transient--prefix transient-current-prefix) value))
+  (let* ((value   (oref (transient-prefix-object) value))
          (changes (oref obj tags))
          (change  (car changes)))
     (if (xor (member (substring change 1) value)
