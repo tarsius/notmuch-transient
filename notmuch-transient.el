@@ -343,9 +343,9 @@ This is a replacement for `notmuch-tag-jump'."
 (cl-defmethod transient-init-value ((obj notmuch-transient-tag-infix))
   (let ((value (oref transient--prefix scope)))
     (oset obj value
-          (delq nil (mapcar (lambda (change)
-                              (car (member (substring change 1) value)))
-                            (oref obj tags))))))
+          (seq-filter (lambda (change)
+                        (car (member (substring change 1) value)))
+                      (oref obj tags)))))
 
 (cl-defmethod transient-format-description ((obj notmuch-transient-tag-infix))
   (let ((desc (oref obj description))
