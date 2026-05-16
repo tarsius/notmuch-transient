@@ -396,16 +396,16 @@ This is a replacement for `notmuch-tag-jump'."
     ("Delete"       . "Undelete")))
 
 (defun notmuch-transient--get-tags ()
-  (cl-case major-mode
-    (notmuch-search-mode (notmuch-search-get-tags))
-    (notmuch-show-mode   (notmuch-show-get-tags))
-    (notmuch-tree-mode   (notmuch-tree-get-tags))))
+  (pcase major-mode
+    ('notmuch-search-mode (notmuch-search-get-tags))
+    ('notmuch-show-mode   (notmuch-show-get-tags))
+    ('notmuch-tree-mode   (notmuch-tree-get-tags))))
 
 (defun notmuch-transient--do-tag (changes)
-  (cl-case major-mode
-    (notmuch-search-mode (notmuch-search-tag changes))
-    (notmuch-show-mode   (notmuch-show-tag   changes))
-    (notmuch-tree-mode   (notmuch-tree-tag   changes))))
+  (pcase major-mode
+    ('notmuch-search-mode (notmuch-search-tag changes))
+    ('notmuch-show-mode   (notmuch-show-tag   changes))
+    ('notmuch-tree-mode   (notmuch-tree-tag   changes))))
 
 ;;; Inject
 
