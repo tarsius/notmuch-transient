@@ -7,6 +7,7 @@ ELCS  = $(ELS:.el=.elc)
 
 DEPS  = compat
 DEPS += cond-let
+DEPS += llama
 DEPS += notmuch/emacs
 DEPS += transient/lisp
 
