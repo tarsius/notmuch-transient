@@ -7,7 +7,7 @@
 ;; Homepage: https://github.com/tarsius/notmuch-transient
 ;; Keywords: mail
 
-;; Package-Version: 1.2.1
+;; Package-Version: 1.2.2
 ;; Package-Requires: (
 ;;     (emacs     "29.1")
 ;;     (compat    "31.0")
