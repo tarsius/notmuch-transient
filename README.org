@@ -7,5 +7,5 @@ Everything is still incomplete and very much subject to change.
 
 #+html: <br><br>
 #+html: <a href="https://github.com/tarsius/notmuch-transient/actions/workflows/compile.yml"><img alt="Compile" src="https://github.com/tarsius/notmuch-transient/actions/workflows/compile.yml/badge.svg"/></a>
-#+html: <a href="https://stable.melpa.org/#/notmuch-transient"><img alt="MELPA Stable" src="https://stable.melpa.org/packages/notmuch-transient-badge.svg"/></a>
-#+html: <a href="https://melpa.org/#/notmuch-transient"><img alt="MELPA" src="https://melpa.org/packages/notmuch-transient-badge.svg"/></a>
+#+html: <a href="https://snapshots.melpa.org/#/notmuch-transient"><img alt="MELPA Snapshots" src="https://snapshots.melpa.org/packages/notmuch-transient-badge.svg"/></a>
+#+html: <a href="https://releases.melpa.org/#/notmuch-transient"><img alt="MELPA Releases" src="https://releases.melpa.org/packages/notmuch-transient-badge.svg"/></a>
