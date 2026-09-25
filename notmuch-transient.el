@@ -40,7 +40,6 @@
 
 (require 'compat)
 (require 'let-alist)
-(require 'seq)
 
 (require 'notmuch)
 (require 'transient)
